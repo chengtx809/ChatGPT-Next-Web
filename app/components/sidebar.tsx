@@ -158,7 +158,7 @@ export function SideBar(props: { className?: string }) {
           BingAPI Demo
         </div>
         <div className={styles["sidebar-sub-title"]}>
-          Proudly adopting NextChat.
+          Just for test.<br>Proudly adopting NextChat.
         </div>
         <div className={styles["sidebar-logo"] + " no-dark"}>
           <ChatGptIcon />
