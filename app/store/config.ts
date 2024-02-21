@@ -34,7 +34,7 @@ export const DEFAULT_CONFIG = {
   theme: Theme.Auto as Theme,
   tightBorder: !!getClientConfig()?.isApp,
   sendPreviewBubble: true,
-  enableAutoGenerateTitle: true,
+  enableAutoGenerateTitle: false,
   sidebarWidth: DEFAULT_SIDEBAR_WIDTH,
 
   disablePromptHint: false,
@@ -46,7 +46,7 @@ export const DEFAULT_CONFIG = {
   models: DEFAULT_MODELS as any as LLMModel[],
 
   modelConfig: {
-    model: "gpt-3.5-turbo" as ModelType,
+    model: "gpt-4-turbo-preview" as ModelType,
     temperature: 0.5,
     top_p: 1,
     max_tokens: 4000,
@@ -55,7 +55,7 @@ export const DEFAULT_CONFIG = {
     sendMemory: true,
     historyMessageCount: 4,
     compressMessageLengthThreshold: 1000,
-    enableInjectSystemPrompts: true,
+    enableInjectSystemPrompts: false,
     template: DEFAULT_INPUT_TEMPLATE,
   },
 };
