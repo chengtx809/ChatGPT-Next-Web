@@ -345,6 +345,29 @@ export const useChatStore = createPersistStore(
           ]);
         });
 
+        if (countMessages(sendMessages) > 32000) {
+          botMessage.content +=
+            "\n\n" +
+            prettyObject({
+              error: true,
+              message: 'The total message length exceeds the limit of 32000 tokens. Please try to shorten your input.',
+            });
+          botMessage.streaming = false;
+          userMessage.isError = true;
+          botMessage.isError = true;
+          get().updateCurrentSession((session) => {
+            session.messages = session.messages.concat();
+          });
+          ChatControllerPool.remove(
+            session.id,
+            botMessage.id ?? messageIndex,
+          );
+
+          console.error("[Chat] failed ", 'The total message length exceeds the limit of 32000 tokens. Please try to shorten your input.');
+          return;
+        }
+
+
         var api: ClientApi;
         if (modelConfig.model.startsWith("gemini")) {
           api = new ClientApi(ModelProvider.GeminiPro);
