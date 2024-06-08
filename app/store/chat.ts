@@ -457,8 +457,7 @@ export const useChatStore = createPersistStore(
           ? [
               createMessage({
                 role: "user",
-                content: "在接下来的对话中，你不能使用脚注来标注出信息来源",
-                date: "",
+                content: "你不能使用脚注来标注信息来源",
               }),
               // createMessage({
               //   role: "system",
