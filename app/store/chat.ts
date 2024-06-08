@@ -456,12 +456,17 @@ export const useChatStore = createPersistStore(
         systemPrompts = shouldInjectSystemPrompts
           ? [
               createMessage({
-                role: "system",
-                content: fillTemplateWith("", {
-                  ...modelConfig,
-                  template: DEFAULT_SYSTEM_TEMPLATE,
-                }),
+                role: "user",
+                content: "在接下来的对话中，你不能使用脚注来标注出信息来源",
+                date: "",
               }),
+              // createMessage({
+              //   role: "system",
+              //   content: fillTemplateWith("", {
+              //     ...modelConfig,
+              //     template: DEFAULT_SYSTEM_TEMPLATE,
+              //   }),
+              // }),
             ]
           : [];
         if (shouldInjectSystemPrompts) {
