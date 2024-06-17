@@ -431,7 +431,7 @@ export const useChatStore = createPersistStore(
         if (session.memoryPrompt.length) {
           return {
             role: "user",
-            content: "在接下来的对话中，你一定不能用脚注和[^1^]，[^2^]类似这样的标记标注出消息来源。",
+            content: "",
             date: "",
           } as ChatMessage;
         }
@@ -455,10 +455,6 @@ export const useChatStore = createPersistStore(
         var systemPrompts: ChatMessage[] = [];
         systemPrompts = shouldInjectSystemPrompts
           ? [
-              createMessage({
-                role: "user",
-                content: "在接下来的对话中，你一定不能用脚注和[^1^]，[^2^]类似这样的标记标注出消息来源。",
-              }),
               // createMessage({
               //   role: "system",
               //   content: fillTemplateWith("", {
@@ -522,6 +518,10 @@ export const useChatStore = createPersistStore(
           ...longTermMemoryPrompts,
           ...contextPrompts,
           ...reversedRecentMessages.reverse(),
+          createMessage({
+            role: "user",
+            content: "在接下来的对话中，你一定不能用脚注和[^1^]，[^2^]类似这样的标记标注出消息来源。",
+          }),
         ];
 
         return recentMessages;
