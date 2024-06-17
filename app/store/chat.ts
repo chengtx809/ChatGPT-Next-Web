@@ -474,10 +474,6 @@ export const useChatStore = createPersistStore(
           //   "[Global System Prompt] ",
           //   systemPrompts.at(0)?.content ?? "empty",
           // );
-          createMessage({
-            role: "user",
-            content: "在接下来的对话中，你一定不能用脚注和[^1^]，[^2^]类似这样的标记标注出消息来源。",
-          }),
         }
         const memoryPrompt = get().getMemoryPrompt();
         // long term memory
