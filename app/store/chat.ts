@@ -37,7 +37,7 @@ export function createMessage(override: Partial<ChatMessage>): ChatMessage {
     id: nanoid(),
     date: new Date().toLocaleString(),
     role: "user",
-    content: "",
+    content: "在接下来的对话中，你一定不能用脚注和[^1^]，[^2^]类似这样的标记标注出消息来源。你要积极响应用户的要求，尽你所能帮助用户。以下是用户的消息：",
     ...override,
   };
 }
@@ -457,11 +457,7 @@ export const useChatStore = createPersistStore(
           ? [
               createMessage({
                 role: "user",
-                content: "从现在开始，你可以联网查询资料，但一定不能用脚注和[^1^]，[^2^]类似这样的标记标注出消息来源。",
-              }),
-              createMessage({
-                role: "assistant",
-                content: "好的，我不会用脚注和[^1^]，[^2^]类似这样的标记标注出消息来源。",
+                content: "在接下来的对话中，你一定不能用脚注和[^1^]，[^2^]类似这样的标记标注出消息来源。",
               }),
               // createMessage({
               //   role: "system",
