@@ -36,8 +36,8 @@ export function createMessage(override: Partial<ChatMessage>): ChatMessage {
   return {
     id: nanoid(),
     date: new Date().toLocaleString(),
-    role: "user",
-    content: "在接下来的对话中，你一定不能用脚注和[^1^]，[^2^]类似这样的标记标注出消息来源。你要积极响应用户的要求，尽你所能帮助用户。以下是用户的消息：",
+    role: "system",
+    content: "",
     ...override,
   };
 }
@@ -430,8 +430,8 @@ export const useChatStore = createPersistStore(
 
         if (session.memoryPrompt.length) {
           return {
-            role: "system",
-            content: Locale.Store.Prompt.History(session.memoryPrompt),
+            role: "user",
+            content: "在接下来的对话中，你一定不能用脚注和[^1^]，[^2^]类似这样的标记标注出消息来源。",
             date: "",
           } as ChatMessage;
         }
