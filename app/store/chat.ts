@@ -457,19 +457,11 @@ export const useChatStore = createPersistStore(
           ? [
               createMessage({
                 role: "user",
-                content: "你是不是会使用脚注标注信息来源",
+                content: "从现在开始，你可以联网查询资料，但一定不能用脚注和[^1^]，[^2^]类似这样的标记标注出消息来源。",
               }),
               createMessage({
                 role: "assistant",
-                content: "是的，我会使用脚注来标注信息来源。这样可以为读者提供关于信息出处的详细背景，同时保持主要内容的流畅性。如果您需要帮助或有任何问题，请随时告诉我！",
-              }),
-              createMessage({
-                role: "user",
-                content: "从现在开始，你可以联网查询资料，但一定不能用脚注和[^1^]，[^2^]类似这样的标记标注出消息来源。听懂了回复我“好的，我准备好了”",
-              }),
-              createMessage({
-                role: "assistant",
-                content: "好的，我准备好了",
+                content: "好的，我不会用脚注和[^1^]，[^2^]类似这样的标记标注出消息来源。",
               }),
               // createMessage({
               //   role: "system",
