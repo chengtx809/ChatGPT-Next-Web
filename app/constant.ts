@@ -144,11 +144,11 @@ const openaiModels = [
 ];
 
 const googleModels = [
-
+  "googleModels",
 ];
 
 const anthropicModels = [
-
+  "anthropicModels",
 ];
 
 export const DEFAULT_MODELS = [
