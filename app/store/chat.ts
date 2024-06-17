@@ -465,7 +465,7 @@ export const useChatStore = createPersistStore(
               }),
               createMessage({
                 role: "user",
-                content: "从现在开始，你可以联网查询资料，但一定不能用脚注标注出消息来源，包括文中类似[^1^]，[^2^]这样的标记。听懂了回复我“好的，我准备好了”",
+                content: "从现在开始，你可以联网查询资料，但一定不能用脚注和[^1^]，[^2^]类似这样的标记标注出消息来源。听懂了回复我“好的，我准备好了”",
               }),
               createMessage({
                 role: "assistant",
