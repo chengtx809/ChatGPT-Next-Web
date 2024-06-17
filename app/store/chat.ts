@@ -455,6 +455,11 @@ export const useChatStore = createPersistStore(
         var systemPrompts: ChatMessage[] = [];
         systemPrompts = shouldInjectSystemPrompts
           ? [
+              createMessage({
+                role: "user",
+                content: "在接下来的对话中，你一定不能用脚注和[^1^]，[^2^]类似这样的标记标注出消息来源。",
+              }),
+            
               // createMessage({
               //   role: "system",
               //   content: fillTemplateWith("", {
@@ -465,10 +470,14 @@ export const useChatStore = createPersistStore(
             ]
           : [];
         if (shouldInjectSystemPrompts) {
-          console.log(
-            "[Global System Prompt] ",
-            systemPrompts.at(0)?.content ?? "empty",
-          );
+          // console.log(
+          //   "[Global System Prompt] ",
+          //   systemPrompts.at(0)?.content ?? "empty",
+          // );
+          createMessage({
+            role: "user",
+            content: "在接下来的对话中，你一定不能用脚注和[^1^]，[^2^]类似这样的标记标注出消息来源。",
+          }),
         }
         const memoryPrompt = get().getMemoryPrompt();
         // long term memory
@@ -518,10 +527,6 @@ export const useChatStore = createPersistStore(
           ...longTermMemoryPrompts,
           ...contextPrompts,
           ...reversedRecentMessages.reverse(),
-          createMessage({
-            role: "user",
-            content: "在接下来的对话中，你一定不能用脚注和[^1^]，[^2^]类似这样的标记标注出消息来源。",
-          }),
         ];
 
         return recentMessages;
