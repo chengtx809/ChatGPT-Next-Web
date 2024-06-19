@@ -337,7 +337,7 @@ export const useChatStore = createPersistStore(
         }
         let userMessage: ChatMessage = createMessage({
           role: "user",
-          content: "在接下来的对话中，你一定不能用脚注和类似[^1^]这样的标记标注出消息来源" + mContent,
+          content: "在接下来的对话中，你一定不能用脚注和类似[^1^]这样的标记标注出消息来源，并逐步思考，积极帮助用户解决问题。你无需回复我的这句话" + mContent,
         });
 
         const botMessage: ChatMessage = createMessage({
@@ -455,11 +455,6 @@ export const useChatStore = createPersistStore(
         var systemPrompts: ChatMessage[] = [];
         systemPrompts = shouldInjectSystemPrompts
           ? [
-              createMessage({
-                role: "user",
-                content: "在接下来的对话中，你一定不能用脚注和[^1^]，[^2^]类似这样的标记标注出消息来源。",
-              }),
-            
               // createMessage({
               //   role: "system",
               //   content: fillTemplateWith("", {
