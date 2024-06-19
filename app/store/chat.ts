@@ -337,7 +337,7 @@ export const useChatStore = createPersistStore(
         }
         let userMessage: ChatMessage = createMessage({
           role: "user",
-          content: "在接下来的对话中，你一定不能用脚注和类似[^1^]这样的标记标注出消息来源，并积极回应用户的请求。你只需要遵守我的要求，无需对我的这个要求进行类似“我明白了，我会避免使用脚注和类似的标记来标注消息来源”的回应" + mContent,
+          content: "在接下来的对话中，你一定不能用脚注和类似[^1^]这样的标记标注出消息来源。你只需要遵守我的要求，无需对我的这个要求进行任何回应" + mContent,
         });
 
         const botMessage: ChatMessage = createMessage({
