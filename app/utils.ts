@@ -258,7 +258,7 @@ export function isVisionModel(model: string) {
     "gpt-4o",
   ];
   const isGpt4Turbo =
-    model.includes("gpt-4-turbo") && !model.includes("preview");
+    model.includes("gpt-4") || model.includes("g4t");
 
   return (
     visionKeywords.some((keyword) => model.includes(keyword)) || isGpt4Turbo
