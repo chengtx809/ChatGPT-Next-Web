@@ -36,7 +36,7 @@ export function createMessage(override: Partial<ChatMessage>): ChatMessage {
   return {
     id: nanoid(),
     date: new Date().toLocaleString(),
-    role: "user",
+    role: "system",
     content: "",
     ...override,
   };
@@ -337,7 +337,7 @@ export const useChatStore = createPersistStore(
         }
         let userMessage: ChatMessage = createMessage({
           role: "user",
-          content: mContent,
+          content: "在接下来的对话中，你一定不能用脚注和类似[^1^]这样的标记标注出消息来源，并逐步思考，积极帮助用户解决问题。你无需回复我的这句话" + mContent,
         });
 
         const botMessage: ChatMessage = createMessage({
@@ -430,8 +430,8 @@ export const useChatStore = createPersistStore(
 
         if (session.memoryPrompt.length) {
           return {
-            role: "system",
-            content: Locale.Store.Prompt.History(session.memoryPrompt),
+            role: "user",
+            content: "",
             date: "",
           } as ChatMessage;
         }
@@ -455,20 +455,20 @@ export const useChatStore = createPersistStore(
         var systemPrompts: ChatMessage[] = [];
         systemPrompts = shouldInjectSystemPrompts
           ? [
-              createMessage({
-                role: "system",
-                content: fillTemplateWith("", {
-                  ...modelConfig,
-                  template: DEFAULT_SYSTEM_TEMPLATE,
-                }),
-              }),
+              // createMessage({
+              //   role: "system",
+              //   content: fillTemplateWith("", {
+              //     ...modelConfig,
+              //     template: DEFAULT_SYSTEM_TEMPLATE,
+              //   }),
+              // }),
             ]
           : [];
         if (shouldInjectSystemPrompts) {
-          console.log(
-            "[Global System Prompt] ",
-            systemPrompts.at(0)?.content ?? "empty",
-          );
+          // console.log(
+          //   "[Global System Prompt] ",
+          //   systemPrompts.at(0)?.content ?? "empty",
+          // );
         }
         const memoryPrompt = get().getMemoryPrompt();
         // long term memory
