@@ -335,8 +335,8 @@ export const useChatStore = createPersistStore(
             }),
           );
         }
-        export const UsedModel= `{{model}}`;
-        if(UsedModel === "gpt-4-vision-preview"){
+
+        if(modelConfig.model === "gpt-4-vision-preview"){
           let userMessage: ChatMessage = createMessage({
             role: "user",
             content: mContent,
