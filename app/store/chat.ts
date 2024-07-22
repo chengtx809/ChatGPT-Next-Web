@@ -340,7 +340,7 @@ export const useChatStore = createPersistStore(
         }
         let userMessage: ChatMessage = createMessage({
           role: "user",
-          content: mContent,
+          content:  mContent + "从现在开始你不能用脚注和类似[^1^]这样的标记标注出消息来源，并逐步思考，积极响应我的问题，你无需回复我的这句话",
         });
 
         const botMessage: ChatMessage = createMessage({
@@ -450,13 +450,13 @@ export const useChatStore = createPersistStore(
         var systemPrompts: ChatMessage[] = [];
         systemPrompts = shouldInjectSystemPrompts
           ? [
-              createMessage({
-                role: "system",
-                content: fillTemplateWith("", {
-                  ...modelConfig,
-                  template: DEFAULT_SYSTEM_TEMPLATE,
-                }),
-              }),
+              // createMessage({
+              //   role: "system",
+              //   content: fillTemplateWith("", {
+              //     ...modelConfig,
+              //     template: DEFAULT_SYSTEM_TEMPLATE,
+              //   }),
+              // }),
             ]
           : [];
         if (shouldInjectSystemPrompts) {
