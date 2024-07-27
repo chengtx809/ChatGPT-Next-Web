@@ -41,6 +41,7 @@ export function AuthPage() {
 
       {!accessStore.hideUserApiKey ? (
         <>
+          <div className={styles["auth-tips"]}>{Locale.Auth.SubTips}</div>
           <input
             className={styles["auth-input"]}
             type="password"
