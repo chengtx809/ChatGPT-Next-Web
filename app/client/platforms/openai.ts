@@ -200,7 +200,7 @@ export class ChatGPTApi implements LLMApi {
             responseText += remainText;
             console.log("[Response Animation] finished");
             if (responseText?.length === 0) {
-              options.onError?.(new Error("empty response from server"));
+              options.onError?.(new Error("当前您的网络环境不佳，请尝试重新生成"));
             }
             return;
           }
