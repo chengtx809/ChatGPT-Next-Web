@@ -22,6 +22,9 @@ export const BAIDU_OATUH_URL = `${BAIDU_BASE_URL}/oauth/2.0/token`;
 export const BYTEDANCE_BASE_URL = "https://ark.cn-beijing.volces.com";
 
 export const ALIBABA_BASE_URL = "https://dashscope.aliyuncs.com/api/";
+
+export const TENCENT_BASE_URL = "https://hunyuan.tencentcloudapi.com";
+
 export const MOONSHOT_BASE_URL = "https://api.moonshot.cn";
 
 export const CACHE_URL_PREFIX = "/api/cache";
@@ -48,6 +51,7 @@ export enum ApiPath {
   Baidu = "/api/baidu",
   ByteDance = "/api/bytedance",
   Alibaba = "/api/alibaba",
+  Tencent = "/api/tencent",
   Moonshot = "/api/moonshot",
   Stability = "/api/stability",
   Artifacts = "/api/artifacts",
@@ -102,6 +106,7 @@ export enum ServiceProvider {
   Baidu = "Baidu",
   ByteDance = "ByteDance",
   Alibaba = "Alibaba",
+  Tencent = "Tencent",
   Moonshot = "Moonshot",
   Stability = "Stability",
 }
@@ -123,6 +128,7 @@ export enum ModelProvider {
   Ernie = "Ernie",
   Doubao = "Doubao",
   Qwen = "Qwen",
+  Hunyuan = "Hunyuan",
   Moonshot = "Moonshot",
 }
 
@@ -140,6 +146,7 @@ export const Anthropic = {
 
 export const OpenaiPath = {
   ChatPath: "v1/chat/completions",
+  ImagePath: "v1/images/generations",
   UsagePath: "dashboard/billing/usage",
   SubsPath: "dashboard/billing/subscription",
   ListModelPath: "v1/models",
@@ -148,7 +155,10 @@ export const OpenaiPath = {
 export const Azure = {
   ChatPath: (deployName: string, apiVersion: string) =>
     `deployments/${deployName}/chat/completions?api-version=${apiVersion}`,
-  ExampleEndpoint: "https://{resource-url}/openai/deployments/{deploy-id}",
+  // https://<your_resource_name>.openai.azure.com/openai/deployments/<your_deployment_name>/images/generations?api-version=<api_version>
+  ImagePath: (deployName: string, apiVersion: string) =>
+    `deployments/${deployName}/images/generations?api-version=${apiVersion}`,
+  ExampleEndpoint: "https://{resource-url}/openai",
 };
 
 export const Google = {
@@ -185,6 +195,10 @@ export const ByteDance = {
 export const Alibaba = {
   ExampleEndpoint: ALIBABA_BASE_URL,
   ChatPath: "v1/services/aigc/text-generation/generation",
+};
+
+export const Tencent = {
+  ExampleEndpoint: TENCENT_BASE_URL,
 };
 
 export const Moonshot = {
@@ -246,6 +260,7 @@ const openaiModels = [
   "gpt-4-vision-preview",
   "gpt-4-turbo-2024-04-09",
   "gpt-4-1106-preview",
+  "dall-e-3",
 ];
 
 const googleModels = [
@@ -298,79 +313,117 @@ const alibabaModes = [
   "qwen-max-longcontext",
 ];
 
+const tencentModels = [
+  "hunyuan-pro",
+  "hunyuan-standard",
+  "hunyuan-lite",
+  "hunyuan-role",
+  "hunyuan-functioncall",
+  "hunyuan-code",
+  "hunyuan-vision",
+];
+
 const moonshotModes = ["moonshot-v1-8k", "moonshot-v1-32k", "moonshot-v1-128k"];
 
+let seq = 1000; // 内置的模型序号生成器从1000开始
 export const DEFAULT_MODELS = [
   ...openaiModels.map((name) => ({
     name,
     available: true,
+    sorted: seq++, // Global sequence sort(index)
     provider: {
       id: "openai",
       providerName: "OpenAI",
       providerType: "openai",
+      sorted: 1, // 这里是固定的，确保顺序与之前内置的版本一致
     },
   })),
   ...openaiModels.map((name) => ({
     name,
     available: true,
+    sorted: seq++,
     provider: {
       id: "azure",
       providerName: "Azure",
       providerType: "azure",
+      sorted: 2,
     },
   })),
   ...googleModels.map((name) => ({
     name,
     available: true,
+    sorted: seq++,
     provider: {
       id: "google",
       providerName: "Google",
       providerType: "google",
+      sorted: 3,
     },
   })),
   ...anthropicModels.map((name) => ({
     name,
     available: true,
+    sorted: seq++,
     provider: {
       id: "anthropic",
       providerName: "Anthropic",
       providerType: "anthropic",
+      sorted: 4,
     },
   })),
   ...baiduModels.map((name) => ({
     name,
     available: true,
+    sorted: seq++,
     provider: {
       id: "baidu",
       providerName: "Baidu",
       providerType: "baidu",
+      sorted: 5,
     },
   })),
   ...bytedanceModels.map((name) => ({
     name,
     available: true,
+    sorted: seq++,
     provider: {
       id: "bytedance",
       providerName: "ByteDance",
       providerType: "bytedance",
+      sorted: 6,
     },
   })),
   ...alibabaModes.map((name) => ({
     name,
     available: true,
+    sorted: seq++,
     provider: {
       id: "alibaba",
       providerName: "Alibaba",
       providerType: "alibaba",
+      sorted: 7,
+    },
+  })),
+  ...tencentModels.map((name) => ({
+    name,
+    available: true,
+    sorted: seq++,
+    provider: {
+      id: "tencent",
+      providerName: "Tencent",
+      providerType: "tencent",
+      sorted: 8,
     },
   })),
   ...moonshotModes.map((name) => ({
     name,
     available: true,
+    sorted: seq++,
     provider: {
       id: "moonshot",
       providerName: "Moonshot",
       providerType: "moonshot",
+      sorted: 9,
     },
   })),
 ] as const;
