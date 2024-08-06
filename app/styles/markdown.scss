@@ -888,11 +888,11 @@
 }
 
 .markdown-body [data-footnote-ref]::before {
-  content: "[";
+  content: "[^";
 }
 
 .markdown-body [data-footnote-ref]::after {
-  content: "]";
+  content: "^]";
 }
 
 .markdown-body .footnotes {
